@@ -1,12 +1,16 @@
 SHELL = /bin/sh
 
-OBJS = main.o tgaimage.o
+OBJS = $(patsubst %.cpp,%.o,$(wildcard *.cpp))
 CFLAGS = -Wall -g
+LDFLAGS =
+LIBS = -lm
 CC = g++
 EXECUTABLE = program
 
 ${EXECUTABLE}:${OBJS}
-	${CC} ${OBJS} -o $@ ${CFLAGS}
+	${CC} ${OBJS} -o $@ ${CFLAGS} ${LDFLAGS} ${LIBS}
 
 clean:
-	rm -rf ${OBJS}
+	rm -f ${OBJS}
+	rm -f ${EXECUTABLE}
+	rm -f *.tga
